@@ -27,6 +27,8 @@ Note that I ran and tested this using npm version 8.3.1 and node version v14.18.
 Prior to running, you must copy .env.template to .env and supply API Keys for the news sources. Please reach out if you require mine.
 
 I opted not to use GNews for this project since the returned articles do not include the articles' authors.
+Instead I implimented this server with the [NewsData](https://newsdata.io/) API.
+Please note that since I'm using the free plan, there is a request limit. NewsData allows 10 articles per request, up to 200 times per day.
 
 ```
 > npm i
@@ -42,6 +44,8 @@ I opted not to use GNews for this project since the returned articles do not inc
 
 ## About the API
 
-TBD (the endpoints/parameters/etc)
+### Endpoint
 
-Hours spent: 1
+`/api/articles`
+
+Hours spent: 3
