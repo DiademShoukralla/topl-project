@@ -22,4 +22,24 @@ Upload your completed project to a public GitHub repository, and then send a lin
 
 Note that I ran and tested this using npm version 8.3.1 and node version v14.18.0
 
-Hours spent: XXX
+### To run the API server
+
+Prior to running, you must copy .env.template to .env and supply a GNews API Key. Please reach out if you require mine.
+
+```
+> npm i
+> npm run start
+```
+
+### To run the tests
+
+```
+> npm i
+> npm run test
+```
+
+## About the API
+
+TBD (the endpoints/parameters/etc)
+
+Hours spent: 1
