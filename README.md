@@ -24,7 +24,9 @@ Note that I ran and tested this using npm version 8.3.1 and node version v14.18.
 
 ### To run the API server
 
-Prior to running, you must copy .env.template to .env and supply a GNews API Key. Please reach out if you require mine.
+Prior to running, you must copy .env.template to .env and supply API Keys for the news sources. Please reach out if you require mine.
+
+I opted not to use GNews for this project since the returned articles do not include the articles' authors.
 
 ```
 > npm i
