@@ -22,15 +22,15 @@ app.get(
     try {
       articles = await retrieveArticles({ num, keywords, category });
     } catch (err) {
+      console.log(err);
       res.status(500);
       return next(new Error("Unable to retrieve articles"));
     }
-    res.send({ success: true, articles: articles });
+    res.send({ success: true, articles: articles, count: articles.length });
   }
 );
 
 app.use((err, req, res, next) => {
-  console.log(err);
   res.send({ error: err.message });
 });
 

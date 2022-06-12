@@ -59,13 +59,13 @@ Successful Response
 ```
 {
     "success": true,
+    "count": 10,
     "articles": [
         {
             "title": "article title",
             "url": "link to the article",
             "imgUrl: "link to the article's image",
             "source": "article's source",
-            "keywords": [],   // List of keywords
             "authors": [],    // List of authors
             "pubDate": "publication date",
             "description": "description of the article (if available)",
@@ -100,4 +100,4 @@ Instead of searching for articles with a specific author I made the decision to 
 
 **tldr;** I know the prompt listed "finding news articles with a specific author", but I chose to find news articles with specific category instead.
 
-**Approx Hours Spent (multiple sittings):** 6
+**Approx Hours Spent (multiple sittings):** 7

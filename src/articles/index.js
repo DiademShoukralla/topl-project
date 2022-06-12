@@ -35,7 +35,6 @@ const fetchExternalOrCache = async ({ keywords, category, page }, source) => {
   // Caching based on source, keywords, category and page number
   const cacheKey = `${source}_${keywords}_${category}_${page}`;
   let pageArticles = cache.get(cacheKey);
-  // If in the cache (TODO)
   if (!pageArticles) {
     pageArticles = await fetchArticles({ keywords, category, page }, source);
     cache.set(cacheKey, pageArticles);
@@ -62,22 +61,20 @@ const retrieveArticles = async (
   const numFullPages = Math.floor(num / PAGE_SIZE);
   const fullPages = Array.from(Array(numFullPages).keys()).map((i) => i + 1); // 1...N
   const numExtraPage = num % PAGE_SIZE;
-  let articles = [];
-  fullPages.forEach((page) => {
-    articles.push(
-      ...fetchExternalOrCache({ keywords, category, page }, source)
-    );
-  });
+  let articles = await Promise.all(
+    fullPages.map((page) =>
+      fetchExternalOrCache({ keywords, category, page }, source)
+    )
+  ).then((allPages) => allPages.flat());
 
   if (numExtraPage > 0) {
     const lastPage = fullPages[fullPages.length - 1] + 1;
-    const pageArticles = fetchExternalOrCache(
+    let pageArticles = await fetchExternalOrCache(
       { keywords, category, page: lastPage },
       source
     );
     articles.push(...pageArticles.slice(0, numExtraPage));
   }
-
   return articles.map((article) => article.toJSON());
 };
 

@@ -3,7 +3,6 @@ class Article {
   url;
   imgUrl;
   source;
-  keywords;
   authors;
   pubDate;
   description;
@@ -25,7 +24,6 @@ class Article {
       url: this.url,
       imgUrl: this.imgUrl,
       source: this.source,
-      keywords: this.keywords,
       authors: this.authors,
       pubDate: this.pubDate,
       description: this.description,
