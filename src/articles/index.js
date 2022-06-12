@@ -1,5 +1,6 @@
 const { Article } = require("./article");
 const NewsDataApi = require("./newsdata");
+const cache = require("../cache");
 
 const PAGE_SIZE = 10;
 
@@ -31,13 +32,13 @@ const fetchArticles = (queryObj, source) => {
  * @return {Article[]}
  */
 const fetchExternalOrCache = async ({ keywords, category, page }, source) => {
-  let pageArticles;
+  // Caching based on source, keywords, category and page number
+  const cacheKey = `${source}_${keywords}_${category}_${page}`;
+  let pageArticles = cache.get(cacheKey);
   // If in the cache (TODO)
-  if (false) {
-    pageArticles = []; // Replace with cache fetch
-  } else {
+  if (!pageArticles) {
     pageArticles = await fetchArticles({ keywords, category, page }, source);
-    // cache.put(...)
+    cache.set(cacheKey, pageArticles);
   }
   return pageArticles;
 };
