@@ -50,7 +50,7 @@ const lang = "en";
  * @returns {NewsDataArticle[]} Articles already processed
  */
 const fetchArticles = (queryObj) => {
-  let { page = 1, query } = queryObj;
+  let { page, query } = queryObj;
   let searchQuery = query ? `&q=${encodeURIComponent(query)}` : "";
   let requestUrl = `${API_URL}?apiKey=${API_KEY}&language=${lang}&page=${page}${searchQuery}`;
   return axios

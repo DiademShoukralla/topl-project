@@ -20,22 +20,19 @@ const fetchArticles = (queryObj, source) => {
 /**
  * Retrieve articles based on a query
  *
- * @param {{
- *  queryObj: {
- *    query: string|undefined;
- *    page: number|undefined;
- *  };
- *  num: number;
- * }} queryObj Object containing information to return articles on
+ * @param {string|undefined;} query query to return articles on
  * @param {string} source Denotes which article source we will use if
  * fetching from an external api is needed.
+ * @returns {object} list JSON objects containing the articles
  */
-const retrieveArticles = async (queryObj = {}, source = "NewsData") => {
+const retrieveArticles = async (query, source = "NewsData") => {
   let articles;
   // If in the cache
   if (false) {
     articles = []; // Replace with cache fetch
   } else {
+    let queryObj = { page: 1 };
+    if (query) queryObj.query = query;
     articles = await fetchArticles(queryObj, source);
     // cache.put(articles) => After processed
   }
