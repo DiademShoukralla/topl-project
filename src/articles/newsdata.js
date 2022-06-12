@@ -1,3 +1,4 @@
+const axios = require("axios").default;
 const { Article, Metadata } = require("./article");
 
 class NewsDataArticle extends Article {
@@ -35,14 +36,42 @@ class NewsDataMetadata extends Metadata {
  * Logic for fetching articles from the NewsData API.
  */
 const API_KEY = process.env.NEWSDATA_KEY;
-// For simplicity sake, we will only fetch articles in English
+const API_URL = "https://newsdata.io/api/1/news";
+
+// For simplicity, will only fetch english articles
 const lang = "en";
 
 /**
  *
- * @param {*} queryObj Object containing information to query on
+ * @param {{
+ *  query: string|undefined;
+ *  page: number;
+ * }} queryObj query info to search on such as keywords or pagination offset
  * @returns {NewsDataArticle[]} Articles already processed
  */
-const fetchArticles = (queryObj) => {};
+const fetchArticles = (queryObj) => {
+  let { page = 1, query } = queryObj;
+  let searchQuery = query ? `&q=${encodeURIComponent(query)}` : "";
+  let requestUrl = `${API_URL}?apiKey=${API_KEY}&language=${lang}&page=${page}${searchQuery}`;
+  return axios
+    .get(requestUrl)
+    .then(({ data: { status, results } }) => {
+      if (status !== "success")
+        return Promise.reject(`Status from NewsData API call was ${status}`);
+      if (!results)
+        return Promise.reject(
+          "Response from NewsData API call not as expected"
+        );
+      return results;
+    })
+    .then((articles) =>
+      articles.map((article) => {
+        let metadata = new NewsDataMetadata(article);
+        return new NewsDataArticle(article, metadata);
+      })
+    );
+};
 
-module.exports = fetchArticles;
+module.exports = {
+  fetchArticles,
+};

@@ -9,8 +9,8 @@ class Article {
   description;
   content;
   metadata;
-  constructor(article) {
-    this.metadata = new Metadata(article);
+  constructor(article, metadata) {
+    this.metadata = metadata;
     this.processArticle(article);
   }
 
@@ -76,8 +76,9 @@ class Metadata {
     return text
       .toLowerCase()
       .trim()
-      .replace(/[\.,?!"`()<>\[\]]/g, "")
-      .replace(/\s{2,}/g, " ");
+      .replace(/[^(\w|'-\s)]/g, "")
+      .replace(/\s{2,}/g, " ")
+      .split(" ");
   }
 
   toJSON() {
