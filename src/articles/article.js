@@ -4,6 +4,7 @@ class Article {
   imgUrl;
   source;
   authors;
+  categories;
   pubDate;
   description;
   content;
@@ -25,6 +26,7 @@ class Article {
       imgUrl: this.imgUrl,
       source: this.source,
       authors: this.authors,
+      categories: this.categories,
       pubDate: this.pubDate,
       description: this.description,
       content: this.content,

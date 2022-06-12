@@ -9,6 +9,7 @@ class NewsDataArticle extends Article {
     this.imgUrl = article.image_url || null;
     this.source = article.source_id || null;
     this.authors = article.creator || [];
+    this.categories = article.category || [];
     this.pubDate = article.pubDate || null;
     this.description = article.description || "";
     this.content = article.content || "";

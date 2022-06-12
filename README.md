@@ -66,6 +66,7 @@ Successful Response
             "url": "link to the article",
             "imgUrl: "link to the article's image",
             "source": "article's source",
+            "categories": [],  // List of categories
             "authors": [],    // List of authors
             "pubDate": "publication date",
             "description": "description of the article (if available)",
