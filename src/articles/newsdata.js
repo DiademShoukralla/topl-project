@@ -43,16 +43,25 @@ const lang = "en";
 
 /**
  *
+ * Perform API call, fetching the request articles
+ *
+ * Precondition:
+ * - category is a valid value
+ * - keywords is URL encoded
+ *
+ * Note: Page size in this API is always 10 (for free tier)
+ *
  * @param {{
- *  query: string|undefined;
+ *  keywords: string|undefined;
+ *  category: string|undefined;
  *  page: number;
  * }} queryObj query info to search on such as keywords or pagination offset
  * @returns {NewsDataArticle[]} Articles already processed
  */
-const fetchArticles = (queryObj) => {
-  let { page, query } = queryObj;
-  let searchQuery = query ? `&q=${encodeURIComponent(query)}` : "";
-  let requestUrl = `${API_URL}?apiKey=${API_KEY}&language=${lang}&page=${page}${searchQuery}`;
+const fetchArticles = ({ page, keywords, category }) => {
+  let searchQuery = keywords ? `&q=${keywords}` : "";
+  let categoryQuery = category ? `&category=${category}` : "";
+  let requestUrl = `${API_URL}?apiKey=${API_KEY}&language=${lang}&page=${page}${searchQuery}${categoryQuery}`;
   return axios
     .get(requestUrl)
     .then(({ data: { status, results } }) => {
