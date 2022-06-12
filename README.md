@@ -36,6 +36,8 @@ Prior to running, you must copy .env.template to .env and supply API Keys for th
 > npm run start
 ```
 
+Server will run on `:3000`
+
 ### To run the tests
 
 ```
@@ -101,4 +103,4 @@ Instead of searching for articles with a specific author I made the decision to 
 
 **tldr;** I know the prompt listed "finding news articles with a specific author", but I chose to find news articles with specific category instead.
 
-**Approx Hours Spent (multiple sittings):** 7
+**Approx Hours Spent (multiple sittings):** 8

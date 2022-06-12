@@ -68,7 +68,7 @@ const retrieveArticles = async (
   ).then((allPages) => allPages.flat());
 
   if (numExtraPage > 0) {
-    const lastPage = fullPages[fullPages.length - 1] + 1;
+    const lastPage = (fullPages[fullPages.length - 1] || 0) + 1;
     let pageArticles = await fetchExternalOrCache(
       { keywords, category, page: lastPage },
       source

@@ -72,7 +72,7 @@ class Metadata {
    * @return {string[]} array containing the normalized words in the text
    */
   getWordArray(text) {
-    if (text === null || text.trim() === "") return [];
+    if (!text || text.trim() === "") return [];
     return text
       .toLowerCase()
       .trim()

@@ -39,6 +39,7 @@ class MockMetadata extends Metadata {
 const article1 = {
   title: "article1",
   content: "A story about dinosaurs. Dinosaurs!",
+  description: "Dinosaur: A Trilogy",
 };
 const article2 = {
   title: "article2",
@@ -50,11 +51,12 @@ const article3 = {
 const article4 = {
   title: "article4",
   description: "More Dinosaurs",
-  category: ["science", "tech"],
+  category: ["science", "sports"],
 };
 const article5 = {
   title: "article5",
-  category: ["science", "tech"],
+  content: "How many dinosaurs is too many?",
+  category: ["science", "sports"],
 };
 const article6 = {
   title: "article6",
@@ -64,7 +66,7 @@ const article7 = {
 };
 const article8 = {
   title: "article8",
-  category: ["food"],
+  category: ["politics"],
 };
 const article9 = {
   title: "article9",
@@ -95,16 +97,16 @@ const articles = [
 ];
 
 const keywordArticles = {
-  dinosaurs: [article1, article4],
+  dinosaur: [article1, article4, article5],
 };
 
 const categoryArticles = {
-  food: [article8],
+  politics: [article8],
   science: [article2, article4, article5],
-  tech: [article5],
+  sports: [article4, article5],
 };
 
-const fetchArticles = ({ page, keywords, category }) => {
+const fetchArticleInfos = ({ page, keywords, category }) => {
   if (keywords && category) {
     let kArticles = keywordArticles[keywords] || [];
     let cArticles = categoryArticles[category] || [];
@@ -124,6 +126,13 @@ const fetchArticles = ({ page, keywords, category }) => {
   // Query with no keywords or category will be over a page.
   const pageStart = (page - 1) * 10;
   return articles.slice(pageStart, pageStart + 10);
+};
+
+const fetchArticles = (queryObj) => {
+  return fetchArticleInfos(queryObj).map((a) => {
+    let metadata = new MockMetadata(a);
+    return new MockArticle(a, metadata);
+  });
 };
 
 module.exports = {
